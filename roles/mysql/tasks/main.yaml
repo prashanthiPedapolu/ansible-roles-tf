@@ -9,20 +9,19 @@
     state: started
     enabled: yes
 
-- name: install boto3 and botocore
+- name: install boto3, botocore, and PyMySQL
   ansible.builtin.pip:
     name: "{{ item }}"
     executable: pip3.9
   loop:
     - boto3
     - botocore
+    - PyMySQL
 
-# ✅ fetch the root password securely from SSM
 - name: fetch mysql root password from ssm
   ansible.builtin.set_fact:
     MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/roboshop/dev/mysql/mysql_root_password', region='us-east-1', decrypt=True) }}"
 
-# ✅ set the root password using mysql_user (idempotent & automation-friendly)
 - name: set MySQL root password
   community.mysql.mysql_user:
     name: root

@@ -14,8 +14,18 @@
     name: "{{ item }}"
     executable: pip3.9
   loop:
-  - boto3
-  - botocore
+    - boto3
+    - botocore
 
-- name: setp root password
-  ansible.builtin.command: mysql_secure_installation --set-root-pass {{ MYSQL_ROOT_PASSWORD }}
+# ✅ fetch the root password securely from SSM
+- name: fetch mysql root password from ssm
+  ansible.builtin.set_fact:
+    MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/roboshop/dev/mysql/mysql_root_password', region='us-east-1', decrypt=True) }}"
+
+# ✅ set the root password using mysql_user (idempotent & automation-friendly)
+- name: set MySQL root password
+  community.mysql.mysql_user:
+    name: root
+    host: localhost
+    password: "{{ MYSQL_ROOT_PASSWORD }}"
+    login_unix_socket: /var/lib/mysql/mysql.sock

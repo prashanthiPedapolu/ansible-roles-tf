@@ -1,0 +1,5 @@
+- name: configure mongodb components
+  hosts: mongodb
+  become: yes
+  roles:
+  - mongodb

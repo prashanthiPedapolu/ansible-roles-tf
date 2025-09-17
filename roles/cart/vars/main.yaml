@@ -1,0 +1,2 @@
+CATALOGUE_HOST: catalogue.backend-{{ env }}.mylearnings.site
+REDIS_HOST: redis-{{ env }}.mylearnings.site

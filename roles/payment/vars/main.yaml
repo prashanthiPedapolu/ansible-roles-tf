@@ -1,0 +1,5 @@
+CART_HOST: cart.backend-{{ env }}.mylearnings.site
+USER_HOST: user.backend-{{ env }}.mylearnings.site
+RABBITMQ_HOST: rabbitmq-{{ env }}.mylearnings.site
+RABBITMQ_USER: roboshop
+RABBITMQ_PASSWORD: roboshop123

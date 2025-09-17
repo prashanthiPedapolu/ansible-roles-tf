@@ -1,0 +1,2 @@
+REDIS_HOST: redis.mylearnings.site
+MONGODB_HOST: mongodb.mylearnings.site

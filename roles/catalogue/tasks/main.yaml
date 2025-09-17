@@ -6,7 +6,7 @@
 
 - name: nodejs setup
   include_role:
-    name: common
+    name: comman
     tasks_from: nodejs
 
 - name: copy mongodb repo
@@ -39,7 +39,7 @@
 
 - name: systemd setup
   include_role:
-    name: common
+    name: comman
     tasks_from: systemd.yaml
 
 # - name: Deployment
